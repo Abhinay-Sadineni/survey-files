@@ -3,6 +3,7 @@ import "./Template.css";
 import uuid from "react-uuid";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Mainbody from "./Mainbody";
+import Header from "./Header";
 function Template() {
   const createForm = () => {
     // console.log("clicked");
@@ -12,6 +13,7 @@ function Template() {
 
   return (
     <>
+      <Header />
       <div className="template_section">
         <div className="template_top">
           <div className="template_left">

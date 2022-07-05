@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./Header";
 import "./New Form.css";
 import Question_form from "./Question_form";
 import CenteredTabs from "./Tabs";
@@ -6,6 +7,7 @@ import CenteredTabs from "./Tabs";
 export default function Form1() {
   return (
     <>
+      <Header />
       <div className="form_header">
         <div className="form_header_left">
           <img

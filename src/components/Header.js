@@ -37,32 +37,17 @@ function Header() {
                 Form +
               </Link>
             </li>
-            <li className="services">
-              <a href="#">Settings</a>
-              {/* <ul className="dropdown">
-                <li>
-                  <a href="/">Dropdown 1 </a>
-                </li>
-                <li>
-                  <a href="/">Dropdown 2</a>
-                </li>
-                <li>
-                  <a href="/">Dropdown 2</a>
-                </li>
-                <li>
-                  <a href="/">Dropdown 3</a>
-                </li>
-                <li>
-                  <a href="/">Dropdown 4</a>
-                </li>
-              </ul> */}
-            </li>
             <li>
-              <a href="#">Contact</a>
+              <Link to="/Profile" target="_blank">
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style={{width: "40px" , cursor:"pointer"}} />
+             Edit-Profile
+             </Link>
             </li>
+
           </div>
         </ul>
       </nav>
+
     </>
   );
 }
