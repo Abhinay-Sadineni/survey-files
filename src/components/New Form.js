@@ -3,8 +3,21 @@ import Header from "./Header";
 import "./New Form.css";
 import Question_form from "./Question_form";
 import CenteredTabs from "./Tabs";
-
+import axios from "axios";
+import {useState,useEffect} from "react"
 export default function Form1() {
+
+  const [survey, setsurvey] = useState('');
+  const[isPending, setIspending]=useState(true);
+useEffect(()=>{axios.get("http://localhost:9000/add_questions/:500")
+.then(function (res){
+console.log("hello"+ res.data.questions);
+let que_data=[res.data.questions];
+setsurvey(que_data);
+setIspending(false);
+});},[])
+
+
   return (
     <>
       <Header />
@@ -23,7 +36,8 @@ export default function Form1() {
         <div className="form_header_right"></div>
       </div>
       <CenteredTabs></CenteredTabs>
-      <Question_form></Question_form>
+      {isPending &&  <div>Loading...</div> }
+      {!isPending && <Question_form survey={survey}></Question_form>}
     </>
   );
 }

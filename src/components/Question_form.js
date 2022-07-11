@@ -20,12 +20,17 @@ import Radio from "@material-ui/icons/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import "./Question_form.css";
 import MenuItem from "@material-ui/core/MenuItem";
+import axios from "axios"
 
-
-function Question_form() {
+function Question_form(props) {
+  console.log(props.survey);
+  // var initialQ=[];
+  // for(var key in props){
+  //   initialQ[key]=props.survey[key];
+  // }
   const [questions, setQuestions] = useState([
     {
-      questionText: "Question ?",
+      questionText: "New Question ?",
       questionType: "radio",
       options: [
         { optionText: "option1" },
@@ -40,6 +45,16 @@ function Question_form() {
       required: false,
     },
   ]);
+
+useEffect(()=>{
+  setQuestions((questions)=>[...questions,...props.survey[0]]);
+  console.log('i fire once');
+},[]);
+  const [documentName, setDocName] = useState("untitled Document");
+
+  const [documentDescription, setDocDesc] = useState("Add Description");
+
+
 
   function changeQuestion(text, i){
     var newQuestion = [...questions];
@@ -130,6 +145,18 @@ function handleExpand(i){
   setQuestions(qs);
 }
 
+function commitToDB(){
+  axios.post("http://localhost:9000/add_questions",
+    {
+      document_name: documentName,
+      doc_desc: documentDescription,
+      questions: questions,
+    })
+}
+
+function GetFromDB(){
+  
+}
 
   function questionsUI() {
     return questions.map((ques, i) => (
@@ -365,17 +392,30 @@ function handleExpand(i){
                 className="question_form_top_name"
                 style={{ color: "black" }}
                 placeholder="Untitled document"
+                onChange={(e) => {
+                  setDocName(e.target.value);}}
               ></input>
               <input
                 type="text"
                 className="question_form_top_desc"
                 placeholder="Form Description"
+                onChange={(e) => {
+                  setDocDesc(e.target.value);
+                }}
               ></input>
             </div>
           </div>
 
         
           {questionsUI()}
+          <Button
+              variant="contained"
+              color="primary"
+              onClick={commitToDB}
+              style={{ fontSize: "14px" }}
+            >
+              Save
+            </Button>
         </div>
       </div>
     </div>
